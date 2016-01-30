@@ -1,0 +1,15 @@
+{
+  "name": "sparkpost-firebase-webhooks",
+  "version": "0.1.0",
+  "description": "Demo application for storing/processing SparkPost webhook data in Firebase with Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "author": "SparkPost <developers@sparkpost.com>",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^2.4.0",
+    "lodash": "^4.1.0"
+  }
+}
