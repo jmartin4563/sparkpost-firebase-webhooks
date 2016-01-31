@@ -1,7 +1,8 @@
 var Firebase = require('firebase')
   , FirebaseTokenGenerator = require('firebase-token-generator')
   , uuid = require('node-uuid')
-  , _ = require('lodash');
+  , _ = require('lodash')
+  , moment = require('moment');
 
 var SparkyQuery = function() {
   var self = this;
@@ -14,16 +15,23 @@ var SparkyQuery = function() {
       console.error('Unable to authenticate with your Firebase instance!', err);
       process.exit(-1);
     } else {
-      var clicks = self.db.child('clicks');
-      clicks.orderByChild('geo_ip/country').equalTo('US').on('value', function(results) {
-        console.log('Clicks from US Region');
+      var clicks = self.db.child('clicks')
+        , dayAgo = moment().subtract(24, 'hours').unix()
+        , now = moment().unix();
+
+      console.log(dayAgo);
+      console.log(now);
+      clicks.orderByChild('timestamp').startAt(dayAgo.toString()).endAt(now.toString()).on('value', function(results) {
+        console.log('Clicks from US Region in the Last 24 Hours');
         console.log('------------------------------------')
         _.forOwn(results.val(), function(event) {
-          console.log('Recipient:', event.rcpt_to);
-          console.log('Campaign:', event.campaign_id);
-          console.log('Template:', event.template_id);
-          console.log('User-Agent:', event.user_agent);
-          console.log('------------------------------------')
+            if (event.geo_ip && event.geo_ip.country === 'US') {
+              console.log('Recipient:', event.rcpt_to);
+              console.log('Campaign:', event.campaign_id);
+              console.log('Template:', event.template_id);
+              console.log('User-Agent:', event.user_agent);
+              console.log('------------------------------------')
+            }
         });
         process.exit(0);
       });
