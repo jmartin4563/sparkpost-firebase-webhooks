@@ -19,8 +19,6 @@ var SparkyQuery = function() {
         , dayAgo = moment().subtract(24, 'hours').unix()
         , now = moment().unix();
 
-      console.log(dayAgo);
-      console.log(now);
       clicks.orderByChild('timestamp').startAt(dayAgo.toString()).endAt(now.toString()).on('value', function(results) {
         console.log('Clicks from US Region in the Last 24 Hours');
         console.log('------------------------------------')
