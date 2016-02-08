@@ -92,24 +92,31 @@ SparkyFire.prototype.processEvent = function(eventType) {
 };
 
 /**
- * Below are some examples of ways you can post-process your data after the Webhooks store them in an initial Firebase bucket.
+ * Below are some examples of ways you can post-process your data after the
+ * Webhooks store them in an initial Firebase bucket.
  *
- * In this case, we've added post-processing that stores hard bounces, spam complaints and unsubscribes to add them to a smaller
- * bucket called `list-cleanup`. In SparkPost, these types of events will result in a recipient being added to your suppression list.
- * So if a recipient has been suppressed, you should do some list cleaning to make sure your recipient lists only have people who want to
- * get emails from you.
+ * In this case, we've added post-processing that stores hard bounces, spam
+ * complaints and unsubscribes to add them to a smaller bucket called `list-cleanup`.
+ * In SparkPost, these types of events will result in a recipient being added to your
+ * suppression list. So if a recipient has been suppressed, you should do some list
+ * cleaning to make sure your recipient lists only have people who want to get emails
+ * from you.
  *
- * We've also added some post-processing for rejections events. Rejection events mean that during the email creation/sending, there was an error.
- * This means that your recipient never got their email, so we store these events into an `errors` bucket for your review.
+ * We've also added some post-processing for rejections events. Rejection events mean
+ * that during the email creation/sending, there was an error. This means that your
+ * recipient never got their email, so we store these events into an `errors` bucket
+ * for your review.
  *
- * Finally, we also post-process opens and click events into an `engagement` bucket. Opens and clicks are good indicators that what you're sending
- * to your recipients is pertinent and interesting to them.
+ * Finally, we also post-process opens and click events into an `engagement` bucket.
+ * Opens and clicks are good indicators that what you're sending to your recipients
+ * is pertinent and interesting to them.
  *
- * Notice that we're not post-processing _all_ of our events, but for convenience, we've stubbed out methods for each event type for you to modify to
- * fit your data needs. You're also not restricted to just storing the events in Firebase, you could trigger a slack notification, or update an entry
- * in your CRM system, whatever. That's the power of webhooks!
+ * Notice that we're not post-processing _all_ of our events, but for convenience,
+ * we've stubbed out methods for each event type for you to modify to fit your data
+ * needs. You're also not restricted to just storing the events in Firebase, you
+ * could trigger a slack notification, or update an entry in your CRM system, whatever.
+ * That's the power of webhooks!
  */
-
 SparkyFire.prototype.processDelayEvent = function(event) {};
 
 SparkyFire.prototype.processBounceEvent = function(event) {
