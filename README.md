@@ -21,6 +21,4 @@ The first two sections are all you need to get Firebase to consume events from y
 
 ## Querying your SparkPost events
 
-## Securing your Firebase Data
-
 ## Docs and References
